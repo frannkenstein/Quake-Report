@@ -16,13 +16,13 @@ public class EarthQuakeActivity extends AppCompatActivity {
 
 
         ArrayList<Earthquake> earthquakes=new ArrayList<Earthquake>();
-        earthquakes.add(new Earthquake("1","Delhi","29 November"));
-        earthquakes.add(new Earthquake("1","Delhi","29 November"));
-        earthquakes.add(new Earthquake("1","Delhi","29 November"));
-        earthquakes.add(new Earthquake("1","Delhi","29 November"));
+        earthquakes.add(new Earthquake("1.1","Delhi","29 November"));
+        earthquakes.add(new Earthquake("1.1","Delhi","29 November"));
+        earthquakes.add(new Earthquake("1.1","Delhi","29 November"));
+        earthquakes.add(new Earthquake("1.1","Delhi","29 November"));
 
-        ArrayAdapter<Earthquake> itemsAdapter=new ArrayAdapter<Earthquake>(this, R.layout.activity_earth_quake,earthquakes);
+        EarthQuakeAdapter earthquakeAdapter=new EarthQuakeAdapter(this,earthquakes);
         ListView listView=(ListView)findViewById(R.id.list);
-        listView.setAdapter(itemsAdapter);
+        listView.setAdapter(earthquakeAdapter);
     }
 }
