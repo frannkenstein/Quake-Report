@@ -7,27 +7,35 @@ import java.util.StringTokenizer;
  */
 
 public class Earthquake {
-    private String mPlace;
+    private String mPlace,murl;
     private long mtime;
     private double mMagnitude;
 
-    public Earthquake(Double defaultMagnitude, String defaultPlace, long timeInMilliseconds){
-        mMagnitude=defaultMagnitude;
+    public Earthquake(Double defaultMagnitude, String defaultPlace, long timeInMilliseconds,String defaulturl){
 
+        mMagnitude=defaultMagnitude;
         mPlace=defaultPlace;
         mtime=timeInMilliseconds;
+        murl=defaulturl;
     }
 
     public double getmMagnitude(){
+
         return mMagnitude;
     }
 
     public String getmPlace(){
+
         return mPlace;
     }
 
     public long getTimeInMilliseconds() {
         return mtime;
+    }
+
+    public String getMurl(){
+
+        return murl;
     }
 
 }

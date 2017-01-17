@@ -64,10 +64,11 @@ public final class QueryUtils {
                 String location=properties.getString("place");
 
                 long time=properties.getLong("time");
+                String url = properties.getString("url");
 
 
                 //New Earthquake object
-                Earthquake earthquake=new Earthquake(magnitude,location,time);
+                Earthquake earthquake=new Earthquake(magnitude,location,time,url);
                 //adding above in list of earthqaukes
                 earthquakes.add(earthquake);
             }
