@@ -55,11 +55,14 @@ public final class QueryUtils {
             JSONArray earthquakeArray=baseJsonResponse.getJSONArray("features");
 
             for (int i=0;i<earthquakeArray.length();i++){
+
                 JSONObject currentEarthQuake=earthquakeArray.getJSONObject(i);
                 JSONObject properties=currentEarthQuake.getJSONObject("properties");
                 String magnitude=properties.getString("mag");
                 String location=properties.getString("place");
-                String time=properties.getString("time");
+
+                long time=properties.getLong("time");
+                //String time=properties.getString("mtime");
 
                 //New Earthquake object
                 Earthquake earthquake=new Earthquake(magnitude,location,time);
