@@ -11,7 +11,7 @@ public class Earthquake {
     private long mtime;
     private double mMagnitude;
 
-    public Earthquake(double defaultMagnitude, String defaultPlace, long timeInMilliseconds){
+    public Earthquake(Double defaultMagnitude, String defaultPlace, long timeInMilliseconds){
         mMagnitude=defaultMagnitude;
 
         mPlace=defaultPlace;
