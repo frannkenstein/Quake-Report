@@ -21,11 +21,12 @@ public class EarthQuakeAdapter extends ArrayAdapter {
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
-        // Check if the existing view is being reused, otherwise inflate the view
+
         View listItemView = convertView;
         if (listItemView == null) {
             listItemView = LayoutInflater.from(getContext()).inflate(R.layout.layout_earthquake, parent, false);
         }
+
         Earthquake currentEarthquake= (Earthquake) getItem(position);
 
         TextView magView=(TextView)listItemView.findViewById(R.id.magnitude);
@@ -37,6 +38,6 @@ public class EarthQuakeAdapter extends ArrayAdapter {
         TextView dateView=(TextView)listItemView.findViewById(R.id.date);
         dateView.setText(currentEarthquake.getmDate());
 
-return  listItemView;
+        return  listItemView;
     }
 }

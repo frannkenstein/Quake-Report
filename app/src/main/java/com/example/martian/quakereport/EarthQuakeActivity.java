@@ -15,11 +15,16 @@ public class EarthQuakeActivity extends AppCompatActivity {
         setContentView(R.layout.activity_earth_quake);
 
 
-        ArrayList<Earthquake> earthquakes=new ArrayList<Earthquake>();
+        ArrayList<Earthquake> earthquakes=QueryUtils.extractEarthquakes();
+
+
+        //Hidding the fake data and Entering the new JSONData
+
+        /*ArrayList<Earthquake> earthquakes=new ArrayList<Earthquake>();
         earthquakes.add(new Earthquake("1.1","Delhi","29 November"));
         earthquakes.add(new Earthquake("1.1","Delhi","29 November"));
         earthquakes.add(new Earthquake("1.1","Delhi","29 November"));
-        earthquakes.add(new Earthquake("1.1","Delhi","29 November"));
+        earthquakes.add(new Earthquake("1.1","Delhi","29 November"));*/
 
         EarthQuakeAdapter earthquakeAdapter=new EarthQuakeAdapter(this,earthquakes);
         ListView listView=(ListView)findViewById(R.id.list);
