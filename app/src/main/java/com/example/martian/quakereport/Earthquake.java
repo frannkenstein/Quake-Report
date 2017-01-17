@@ -9,22 +9,23 @@ import java.util.StringTokenizer;
 public class Earthquake {
     private String mPlace ,mDate,mMagnitude;
 
-    public Earthquake(String defaultMagnitude,String defaultDate,String defaultPlace){
+    public Earthquake(String defaultMagnitude,String defaultPlace,String defaultDate){
         mMagnitude=defaultMagnitude;
-        mDate=defaultDate;
+
         mPlace=defaultPlace;
+        mDate=defaultDate;
     }
 
     public String getmMagnitude(){
         return mMagnitude;
     }
 
-    public String getmDate(){
-        return mDate;
-    }
-
     public String getmPlace(){
         return mPlace;
+    }
+
+    public String getmDate(){
+        return mDate;
     }
 }
 
