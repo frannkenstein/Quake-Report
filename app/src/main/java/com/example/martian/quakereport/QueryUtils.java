@@ -2,7 +2,9 @@ package com.example.martian.quakereport;
 
 import android.util.Log;
 
+import org.json.JSONArray;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 
@@ -49,6 +51,21 @@ public final class QueryUtils {
 
             // TODO: Parse the response given by the SAMPLE_JSON_RESPONSE string and
             // build up a list of Earthquake objects with the corresponding data.
+            JSONObject baseJsonResponse = new JSONObject(SAMPLE_JSON_RESPONSE);
+            JSONArray earthquakeArray=baseJsonResponse.getJSONArray("features");
+
+            for (int i=0;i<earthquakeArray.length();i++){
+                JSONObject currentEarthQuake=earthquakeArray.getJSONObject(i);
+                JSONObject properties=currentEarthQuake.getJSONObject("properties");
+                String magnitude=properties.getString("mag");
+                String location=properties.getString("place");
+                String time=properties.getString("time");
+
+                //New Earthquake object
+                Earthquake earthquake=new Earthquake(magnitude,location,time);
+                //adding above in list of earthqaukes
+                earthquakes.add(earthquake);
+            }
 
         } catch (JSONException e) {
             // If an error is thrown when executing any of the above statements in the "try" block,
