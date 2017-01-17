@@ -7,17 +7,18 @@ import java.util.StringTokenizer;
  */
 
 public class Earthquake {
-    private String mPlace ,mMagnitude;
+    private String mPlace;
     private long mtime;
+    private double mMagnitude;
 
-    public Earthquake(String defaultMagnitude,String defaultPlace,long timeInMilliseconds){
+    public Earthquake(double defaultMagnitude, String defaultPlace, long timeInMilliseconds){
         mMagnitude=defaultMagnitude;
 
         mPlace=defaultPlace;
         mtime=timeInMilliseconds;
     }
 
-    public String getmMagnitude(){
+    public double getmMagnitude(){
         return mMagnitude;
     }
 

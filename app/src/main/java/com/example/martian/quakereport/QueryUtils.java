@@ -5,6 +5,7 @@ import android.util.Log;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import java.text.DecimalFormat;
 
 import java.util.ArrayList;
 
@@ -58,11 +59,12 @@ public final class QueryUtils {
 
                 JSONObject currentEarthQuake=earthquakeArray.getJSONObject(i);
                 JSONObject properties=currentEarthQuake.getJSONObject("properties");
-                String magnitude=properties.getString("mag");
+
+                double magnitude=properties.getDouble("mag");
                 String location=properties.getString("place");
 
                 long time=properties.getLong("time");
-                //String time=properties.getString("mtime");
+
 
                 //New Earthquake object
                 Earthquake earthquake=new Earthquake(magnitude,location,time);
