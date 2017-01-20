@@ -1,8 +1,10 @@
 package com.example.martian.quakereport;
 
 import android.content.Intent;
+import android.content.Loader;
 import android.net.Uri;
 import android.os.AsyncTask;
+import android.app.LoaderManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,9 +15,13 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
+import android.app.LoaderManager.LoaderCallbacks;
 
-public class EarthQuakeActivity extends AppCompatActivity {
-    private static final String USGS_REQUEST_URL = "http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&orderby=time&minmag=6&limit=10";
+
+
+public class EarthQuakeActivity extends AppCompatActivity  implements LoaderCallbacks<List<Earthquake>> {
+    private static final String USGS_REQUEST_URL = "http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&orderby=time&minmag=5&limit=10";
+    private static final int EARTHQUAKE_LOADER_ID = 1;
 
     private EarthQuakeAdapter earthquakeAdapter;
     @Override
@@ -38,30 +44,27 @@ public class EarthQuakeActivity extends AppCompatActivity {
                 startActivity(websiteIntent);
             }
         });
-        EarthquakeAsyncTask task = new EarthquakeAsyncTask();
-        task.execute(USGS_REQUEST_URL);
+        LoaderManager loaderManager=getLoaderManager();
+        loaderManager.initLoader(EARTHQUAKE_LOADER_ID,null,this);
     }
-        private class EarthquakeAsyncTask extends AsyncTask<String, Void, List<Earthquake>> {
-            @Override
-            protected List<Earthquake> doInBackground(String... urls) {
-
-                if (urls.length <= 0 || urls[0] == null) {
-                    return null;
-                }
-                List<Earthquake> result =  QueryUtils.fetchEarthquakeData(urls[0]);
-                return result;
-            }
-            @Override
-            protected void onPostExecute(List<Earthquake> data){
-                earthquakeAdapter.clear();
-                if(data!=null && !data.isEmpty()){
-                    earthquakeAdapter.addAll(data);
-                }
-            }
-
-
+        @Override
+    public Loader<List<Earthquake>> onCreateLoader(int i,Bundle bundle){
+            return new EarthqaukeLoader(this,USGS_REQUEST_URL);
         }
+    @Override
+       public void onLoadFinished(Loader<List<Earthquake>> loader, List<Earthquake> earthquakes) {
+        earthquakeAdapter.clear();
+        if (earthquakes != null && !earthquakes.isEmpty()) {
+            earthquakeAdapter.addAll(earthquakes);
+        }
+    }
 
+    @Override
+        public void onLoaderReset(Loader<List<Earthquake>> loader) {
+        // Loader reset, so we can clear out our existing data.
+                       earthquakeAdapter.clear();
+    }
 }
+
 
 
