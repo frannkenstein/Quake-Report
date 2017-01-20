@@ -1,7 +1,10 @@
 package com.example.martian.quakereport;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.Loader;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.app.LoaderManager;
 import android.support.v7.app.AppCompatActivity;
@@ -47,9 +50,17 @@ public class EarthQuakeActivity extends AppCompatActivity  implements LoaderCall
                 startActivity(websiteIntent);
             }
         });
-        LoaderManager loaderManager=getLoaderManager();
-        Log.i(LOG_TAG,"calling initloader");
-        loaderManager.initLoader(EARTHQUAKE_LOADER_ID,null,this);
+        ConnectivityManager connMgr=(ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+        if (networkInfo != null && networkInfo.isConnected()) {
+            LoaderManager loaderManager = getLoaderManager();
+            loaderManager.initLoader(EARTHQUAKE_LOADER_ID, null, this);
+         }
+        else {
+            View loadingIndicator = findViewById(R.id.loading_indicator);
+            loadingIndicator.setVisibility(View.GONE);
+            mEmptyStateTextView.setText(R.string.no_internet_connection);
+        }
     }
         @Override
     public Loader<List<Earthquake>> onCreateLoader(int i,Bundle bundle){
