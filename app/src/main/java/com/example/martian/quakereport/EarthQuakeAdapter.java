@@ -2,7 +2,10 @@ package com.example.martian.quakereport;
 
 import android.app.Activity;
 
+import android.os.Message;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,6 +35,7 @@ import java.util.List;
 
 
     public View getView(int position, View counterView, ViewGroup parent) {
+        Log.d("Message 3","Entered getView");
 
         View listItemView = counterView;
 

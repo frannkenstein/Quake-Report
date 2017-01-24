@@ -23,7 +23,7 @@ import static com.example.martian.quakereport.QueryUtils.LOG_TAG;
 
 
 public class EarthQuakeActivity extends AppCompatActivity  implements LoaderCallbacks<List<Earthquake>> {
-    private static final String USGS_REQUEST_URL = "http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&orderby=time&minmag=7&limit=10";
+    private static final String USGS_REQUEST_URL = "http://earthquake.usgs.gov/fdsnws/event/1/query?format=geojson&orderby=time&minmag=4&limit=10";
     private static final int EARTHQUAKE_LOADER_ID = 1;
     private TextView mEmptyStateTextView;
     private EarthQuakeAdapter earthquakeAdapter;
@@ -32,11 +32,14 @@ public class EarthQuakeActivity extends AppCompatActivity  implements LoaderCall
         Log.i(LOG_TAG,"ONCreate is called");
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_earth_quake);
+        Log.d("Message 1","Entered onCreate");
 
 
         earthquakeAdapter = new EarthQuakeAdapter(this, new ArrayList<Earthquake>());
         ListView listView = (ListView) findViewById(R.id.list);
+        Log.d("Message 2","ListView called");
         listView.setAdapter(earthquakeAdapter);
+        Log.d("Message 4","After ListView called");
 
         mEmptyStateTextView = (TextView) findViewById(R.id.empty_view);
         listView.setEmptyView(mEmptyStateTextView);
@@ -74,7 +77,7 @@ public class EarthQuakeActivity extends AppCompatActivity  implements LoaderCall
 
         mEmptyStateTextView.setText(R.string.no_earthquakes);
         earthquakeAdapter.clear();
-        Log.i(LOG_TAG,"calling onloadfinished");
+        Log.d("Message 5","checking");
         if (earthquakes != null && !earthquakes.isEmpty()) {
             earthquakeAdapter.addAll(earthquakes);
         }
